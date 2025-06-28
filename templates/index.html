@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}
+    Homepage
+{% endblock title %}
+{% block body %}
+<div class="container">
+    <h1 class="fs-3">Add your Todos</h1>
+    <form method="post" action="/">
+        <div class="mb-3">
+            <label for="taskId" class="form-label">Task</label>
+            <input type="text" class="form-control" name="task" id="taskId" placeholder="Enter your task here..."
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="taskDesc" class="form-label">Task Description</label>
+            <textarea class="form-control" name="taskDesc" id="taskDesc" placeholder="Enter task description here..."
+                required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+</div>
+
+<div class="container my-3">
+    <h1>Your Todos</h1>
+    {% if todos|length>0 %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SrNo.</th>
+                <th scope="col">Todo Name</th>
+                <th scope="col">Todo Description</th>
+                <th scope="col">DateTime</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todos %}
+            <tr>
+                <th scope="row">{{loop.index}}</th>
+                <td>{{todo.todoTitle}}</td>
+                <td>{{todo.todoDescription}}</td>
+                <td>{{todo.dateTime}}</td>
+                <td class="d-flex justify-content-between gap-1">
+                    <a href="/update/{{todo.sno}}" class="btn btn-outline-success btn-sm">Update</a>
+                    <a href="/delete/{{todo.sno}}" class="btn btn-outline-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info" role="alert">
+        No Todos Found!! Add todos by filling up above form.
+    </div>
+    {% endif %}
+</div>
+{% endblock body %}

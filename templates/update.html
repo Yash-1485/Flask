@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Update Todos
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+    <h1 class="fs-3">Update Todo</h1>
+    <form method="post" action="/update/{{todo.sno}}">
+        <div class="mb-3">
+            <label for="taskId" class="form-label">Task</label>
+            <input type="text" class="form-control" name="task" id="taskId" placeholder="Enter your task here..."
+                required value="{{todo.todoTitle}}">
+        </div>
+        <div class="mb-3">
+            <label for="taskDesc" class="form-label">Task Description</label>
+            <textarea class="form-control" name="taskDesc" id="taskDesc" placeholder="Enter task description here..."
+                required>{{todo.todoDescription}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+</div>
+
+{% endblock body %}
